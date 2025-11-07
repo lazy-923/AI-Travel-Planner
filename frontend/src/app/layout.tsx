@@ -13,14 +13,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <script
           type="text/javascript"
           src={`https://webapi.amap.com/maps?v=2.0&key=${process.env.NEXT_PUBLIC_AMAP_KEY}`}
         ></script>
       </head>
-      <body>
+      <body suppressHydrationWarning={true}>
         <Header />
         <main className="pt-16">{children}</main>
       </body>

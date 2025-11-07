@@ -255,7 +255,10 @@ async def save_history(request: Request, supabase: Client = Depends(get_supabase
 
 
 @app.get("/api/history/{user_id}")
-def get_history(user_id: str, page: int = 1, per_page: int = 10):
+def get_history(user_id: str, page: int = 1, per_page: int = 10, supabase: Client = Depends(get_supabase)):
+    """
+    Get history for a user.
+    """
     try:
         start_index = (page - 1) * per_page
         end_index = start_index + per_page - 1

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/utils/supabase/client';
 import { usePlanStore } from "@/store";
 import ExpenseModal from "@/components/ExpenseModal";
-import BudgetAnalysisChart from "@/components/BudgetAnalysisChart";
+
 import BudgetModal from "@/components/BudgetModal";
 import { TravelHistory, Expense, Budget } from "@/types/types";
 

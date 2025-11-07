@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import HistoryList from "./components/HistoryList";
 import ExpenseModal from "@/components/ExpenseModal";
-import BudgetAnalysisChart from "@/components/BudgetAnalysisChart";
+
 import BudgetModal from "@/components/BudgetModal";
 import { TravelHistory, Expense, Budget } from "@/types/types";
 import { supabase } from "@/utils/supabase/client";
@@ -362,14 +362,7 @@ const HistoryPage = () => {
                         isViewMode={isViewMode}
                     />
                 )}
-                {isAnalysisModalOpen && selectedHistory && (
-                    <BudgetAnalysisChart
-                        isOpen={isAnalysisModalOpen}
-                        onClose={() => setIsAnalysisModalOpen(false)}
-                        expenses={expenses}
-                        budget={budget?.amount}
-                    />
-                )}
+
             </div>
         </div>
     );
