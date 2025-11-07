@@ -3,6 +3,7 @@ export interface TravelHistory {
     query: string;
     response: string;
     user_id: string;
+    locations: string;
     created_at: string;
     has_budget?: boolean;
 }

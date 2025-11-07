@@ -29,7 +29,7 @@ const ExpenseModal: React.FC<ExpenseModalProps> = ({ isOpen, onClose, onSave, ex
                 category,
                 amount: parseFloat(amount),
                 description,
-                travelHistoryId: "", // This will be set in the parent component
+                historyId: "", // This will be set in the parent component
             });
             setCategory("");
             setAmount("");
