@@ -1,6 +1,12 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
 
+declare global {
+    interface Window {
+        AMap: any;
+    }
+}
+
 interface MapProps {
     locations?: { name: string; lng: number; lat: number }[];
 }
