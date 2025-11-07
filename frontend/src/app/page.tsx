@@ -229,14 +229,18 @@ export default function Home() {
     try {
       const { data, error } = await supabase
         .from("budgets")
-        .insert([{
+        .upsert({
           history_id: selectedHistory.id,
           user_id: user.id,
           budget_details: JSON.stringify(budget)
-        }])
+        })
         .select();
 
       if (error) throw error;
+
+      if (data) {
+        setSelectedHistory({ ...selectedHistory, has_budget: true });
+      }
 
       setIsBudgetModalOpen(false);
     } catch (error) {
