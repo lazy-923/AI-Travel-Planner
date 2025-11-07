@@ -27,6 +27,9 @@ jobs:
         context: ./frontend
         push: true
         tags: ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ secrets.APP_FRONTEND_NAME }}:latest
+        build-args: |
+          NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
 
     - name: Build and push backend image
       uses: docker/build-push-action@v4
