@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: crpi-hkaidf4zyzgd849x.cn-hangzhou.personal.cr.aliyuncs.com/ai-travel-planner-079/ai-travel-planner-frontend:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+      - NEXT_PUBLIC_SUPABASE_URL=${SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - NEXT_PUBLIC_AMAP_KEY=${AMAP_KEY_FRONTEND}
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    image: crpi-hkaidf4zyzgd849x.cn-hangzhou.personal.cr.aliyuncs.com/ai-travel-planner-079/ai-travel-planner-backend:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_ANON_KEY} # Maps user's ANON_KEY to the KEY backend code expects
+      - AMAP_API_KEY=${AMAP_KEY_BACKEND}
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

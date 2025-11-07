@@ -1,67 +1,88 @@
-# AI 旅行规划师
+# AI 旅行规划师 🚀
 
-欢迎使用 AI 旅行规划师！本应用程序利用 AI 的强大功能，帮助您生成个性化的旅行行程。只需提供您的目的地、日期、预算和偏好，剩下的就交给 AI 吧。
+欢迎使用 AI 旅行规划师！这是一个智能应用，可以根据您的目的地、预算和兴趣，为您生成个性化的旅行计划。
 
-## 功能特性
+## ✨ 一键启动
 
-- **智能行程规划:** 支持语音或文本输入旅行详情。
-- **预算管理:** AI 驱动的预算分析和开销追踪。
-- **用户管理:** 保存和管理您的旅行计划。
-- **地图集成:** 在地图上查看您的行程并进行导航。
+本项目已打包为 Docker 镜像，您无需关心复杂的环境配置，只需几个简单步骤即可在本地运行。
 
-## 技术栈
+### 1. 环境准备
 
-- **前端:** Next.js, Tailwind CSS
-- **后端:** Python, FastAPI
-- **数据库/认证:** Supabase
-- **AI 服务:** 阿里百炼
-- **地图服务:** 高德地图
-- **语音识别:** Web Speech API
+- **安装 Docker**: 请确保您的电脑上已经安装了 [Docker Desktop](https://www.docker.com/products/docker-desktop/)。
 
-## 快速开始
+### 2. 配置文件
 
-### 环境要求
+1.  创建一个新的文件夹，例如 `ai-travel-planner`。
+2.  在该文件夹中，创建两个文件：
+    *   `docker-compose.yml`
+    *   `.env`
 
-- Node.js
-- Python
-- Yarn (或 npm)
+3.  **将以下内容复制到 `docker-compose.yml` 文件中：**
 
-### 安装步骤
+    ```yaml
+    version: '3.8'
 
-1.  **克隆仓库:**
-    ```bash
-    git clone https://github.com/your-username/ai-travel-planner.git
-    cd ai-travel-planner
+    services:
+      frontend:
+        image: crpi-hkaidf4zyzgd849x.cn-hangzhou.personal.cr.aliyuncs.com/ai-travel-planner-079/ai-travel-planner-frontend:latest
+        ports:
+          - "3000:3000"
+        environment:
+          - NEXT_PUBLIC_API_URL=http://backend:8000
+        depends_on:
+          - backend
+        networks:
+          - app-network
+
+      backend:
+        image: crpi-hkaidf4zyzgd849x.cn-hangzhou.personal.cr.aliyuncs.com/ai-travel-planner-079/ai-travel-planner-backend:latest
+        ports:
+          - "8000:8000"
+        env_file:
+          - ./.env
+        networks:
+          - app-network
+
+    networks:
+      app-network:
+        driver: bridge
     ```
 
-2.  **设置环境变量:**
+4.  **将以下内容复制到 `.env` 文件中，并填入您的 API 密钥：**
 
-    在项目根目录创建一个 `.env` 文件，复制 `.env.example` 的内容，并填入您的 API 密钥。
+    > ⚠️ **重要**: 请将所有占位符替换为您自己的有效密钥和地址。
 
-3.  **安装前端依赖:**
-    ```bash
-    cd frontend
-    yarn install
+    ```env
+    # 阿里百炼 API Key (https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key)
+    DASHSCOPE_API_KEY=YOUR_DASHSCOPE_API_KEY
+
+    # Supabase (在项目的 Settings -> API 中找到)
+    SUPABASE_URL=YOUR_SUPABASE_URL
+    SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+
+    # 高德地图 Key (https://lbs.amap.com/dev/key/app)
+    # 您需要为前端和后端分别申请两个 Key
+    # 前端 Key (类型：Web 端)
+    AMAP_KEY_FRONTEND=YOUR_AMAP_KEY_FOR_FRONTEND
+    # 后端 Key (类型：Web 服务)
+    AMAP_KEY_BACKEND=YOUR_AMAP_KEY_FOR_BACKEND
     ```
 
-4.  **安装后端依赖:**
+### 3. 启动应用
+
+1.  打开您的终端（在 Windows 上是 PowerShell 或命令提示符，在 macOS 或 Linux 上是 Terminal）。
+2.  使用 `cd` 命令进入您刚刚创建的 `ai-travel-planner` 文件夹。
+3.  运行以下命令：
+
     ```bash
-    cd ../backend
-    pip install -r requirements.txt
+    docker-compose up
     ```
 
-### 运行应用
+4.  Docker 将会自动下载所需的镜像并启动应用。首次启动可能需要一些时间。
 
-1.  **启动后端服务:**
-    ```bash
-    cd backend
-    uvicorn main:app --reload
-    ```
+### 4. 访问应用
 
-2.  **启动前端开发服务:**
-    ```bash
-    cd frontend
-    yarn dev
-    ```
+- **前端界面**: 打开浏览器，访问 [http://localhost:3000](http://localhost:3000)
+- **后端 API**: 后端服务运行在 [http://localhost:8000](http://localhost:8000)
 
-在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看应用。
+现在，您可以开始使用 AI 旅行规划师了！
