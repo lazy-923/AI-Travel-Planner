@@ -28,6 +28,7 @@ jobs:
         push: true
         tags: ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ secrets.APP_FRONTEND_NAME }}:latest
         build-args: |
+            NEXT_PUBLIC_AMAP_KEY=${{ secrets.AMAP_KEY_FRONTEND }}
             NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}
             NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
             NEXT_PUBLIC_AMAP_SECURITY_KEY=${{ secrets.AMAP_SECURITY_KEY }}

@@ -3,18 +3,8 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { supabase } from '@/utils/supabase/client';
-import { useEffect } from 'react';
 
 const Header = () => {
-    useEffect(() => {
-        console.log("Verifying environment variables in container:");
-        console.log("NEXT_PUBLIC_AMAP_KEY:", process.env.NEXT_PUBLIC_AMAP_KEY);
-        console.log("NEXT_PUBLIC_AMAP_SECURITY_KEY:", process.env.NEXT_PUBLIC_AMAP_SECURITY_KEY);
-        console.log("NEXT_PUBLIC_SUPABASE_URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
-        console.log("NEXT_PUBLIC_SUPABASE_ANON_KEY:", process
-            .env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-    }, []);
-
     const pathname = usePathname();
     const router = useRouter();
 
