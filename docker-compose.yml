@@ -22,7 +22,7 @@ services:
     environment:
       - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
       - SUPABASE_URL=${SUPABASE_URL}
-      - SUPABASE_KEY=${SUPABASE_ANON_KEY} # Maps user's ANON_KEY to the KEY backend code expects
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY} # Maps user's ANON_KEY to the KEY backend code expects
       - AMAP_API_KEY=${AMAP_KEY_BACKEND}
     networks:
       - app-network
